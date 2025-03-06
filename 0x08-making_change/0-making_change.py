@@ -2,22 +2,19 @@
 """making chages"""
 
 
-def making_changes(coins, total, count):
-    if total < 0:
-        return -1
-    if total == 0:
-        return 0
-    tot = [total - i for i in coins if (total - i) >= 0]
-    if len(tot) == 0:
-        return -1
-    total = min(tot)
-    count += making_changes(coins, total, count)
-    if count == 0:
-        count = -1
-    return count
-
-
 def makeChange(coins, total):
-    if total <= 0:
+    sortCoin = sorted(coins)[::-1]
+    if total == 0 or total < 0:
         return 0
-    return making_changes(coins, total, count=1)
+    x = True
+    i = 0
+    lstCoint = []
+    while total != 0 and i != len(sortCoin):
+        if total >= sortCoin[i]:
+            lstCoint.append(sortCoin[i])
+            total -= sortCoin[i]
+        else:
+            i += 1
+    if total != 0:
+        return -1
+    return len(lstCoint)
